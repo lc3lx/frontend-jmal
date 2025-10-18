@@ -1,70 +1,235 @@
-# Getting Started with Create React App
+# Frontend - موقع بيع حسابات البث
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+واجهة أمامية مبنية على React.js لموقع بيع حسابات خدمات البث المباشر.
 
-## Available Scripts
+## 🏗️ البنية
 
-In the project directory, you can run:
+```
+frontend/
+├── public/          # الملفات العامة
+├── src/
+│   ├── Api/         # إعدادات API
+│   ├── Components/  # المكونات
+│   │   ├── Admin/   # مكونات لوحة الإدمن
+│   │   ├── Category/
+│   │   ├── Home/
+│   │   ├── Products/
+│   │   ├── User/
+│   │   └── Uitily/
+│   ├── hook/        # Custom Hooks
+│   ├── hooks/       # API Hooks
+│   ├── Page/        # الصفحات
+│   │   ├── Admin/
+│   │   ├── Auth/
+│   │   ├── Category/
+│   │   ├── Home/
+│   │   ├── Products/
+│   │   └── User/
+│   ├── redux/       # Redux Store
+│   │   ├── actions/
+│   │   ├── reducers/
+│   │   └── store.js
+│   └── images/      # الصور
+└── package.json
+```
 
-### `npm start`
+## 📦 المكونات الرئيسية
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### للمستخدمين
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### الصفحات
+- `HomePage` - الصفحة الرئيسية مع السلايدر والمنتجات
+- `ShopProductsPage` - صفحة جميع المنتجات مع الفلتر والبحث
+- `ProductDetalisPage` - تفاصيل المنتج والشراء المباشر
+- `AllCategoryPage` - جميع التصنيفات
+- `UserAllOrdersPage` - طلبات المستخدم
+- `UserProfilePage` - الملف الشخصي
 
-### `npm test`
+#### المكونات
+- `ProductCard` - بطاقة عرض المنتج
+- `CategoryCard` - بطاقة عرض التصنيف
+- `NavBarLogin` - شريط التنقل
+- `Footer` - تذييل الصفحة
+- `SideFilter` - فلتر جانبي للمنتجات
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### للإدمن
 
-### `npm run build`
+#### الصفحات
+- `AdminAllOrdersPage` - إدارة الطلبات
+- `AdminOrderDetalisPage` - تفاصيل الطلب وإضافة معلومات الحساب
+- `AdminAllProductsPage` - إدارة المنتجات
+- `AdminAddProductsPage` - إضافة منتج جديد
+- `AdminEditProductsPage` - تعديل منتج
+- `AdminAddCategoryPage` - إضافة تصنيف
+- `AdminAddCouponPage` - إضافة كوبون خصم
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🎣 Custom Hooks
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Products
+- `use-homepage-products-hook` - الحصول على منتجات الصفحة الرئيسية
+- `view-all-products-hook` - عرض جميع المنتجات
+- `view-products-detalis-hook` - عرض تفاصيل منتج
+- `add-products-hook` - إضافة منتج (Admin)
+- `edit-products-hook` - تعديل منتج (Admin)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Orders
+- `user-get-all-order-hook` - الحصول على طلبات المستخدم
+- `change-order-status-hook` - تغيير حالة الطلب (Admin)
+- `get-order-detalis-hook` - الحصول على تفاصيل الطلب
 
-### `npm run eject`
+### Categories
+- `all-category-page-hook` - الحصول على جميع التصنيفات
+- `add-category-hook` - إضافة تصنيف (Admin)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Coupons
+- `add-coupon-hook` - إضافة كوبون (Admin)
+- `coupon-card-hook` - إدارة الكوبونات
+- `edit-coupon-hook` - تعديل كوبون (Admin)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Auth
+- `login-hook` - تسجيل الدخول
+- `register-hook` - التسجيل
+- `forget-password-hook` - نسيت كلمة المرور
+- `reset-password-hook` - إعادة تعيين كلمة المرور
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🔄 Redux State Management
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Reducers
+- `authReducer` - حالة المصادقة
+- `categoryReducer` - حالة التصنيفات
+- `productsReducer` - حالة المنتجات
+- `orderReducer` - حالة الطلبات
+- `couponReducer` - حالة الكوبونات
+- `homepageImageReducer` - حالة صور الصفحة الرئيسية
 
-## Learn More
+### Actions
+تم تنظيم Actions حسب الوحدة:
+- `authAction.js`
+- `categoryAction.js`
+- `productsAction.js`
+- `ordersAction.js`
+- `couponAction.js`
+- `homepageImageAction.js`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🎨 التصميم
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Bootstrap 5 للتصميم الأساسي
+- CSS مخصص للمكونات
+- تصميم متجاوب مع جميع الأجهزة
+- واجهة عربية كاملة
+- ألوان عصرية وجذابة
 
-### Code Splitting
+## 🚀 التشغيل
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. تثبيت الحزم:
+```bash
+npm install
+```
 
-### Analyzing the Bundle Size
+2. إنشاء ملف `.env` (اختياري):
+```env
+REACT_APP_API_URL=http://localhost:8000/api/v1
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. تشغيل التطبيق:
+```bash
+npm start
+```
 
-### Making a Progressive Web App
+## 📝 التغييرات من المشروع الأصلي
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### تم إزالة:
+- ❌ مكونات السلة (Cart)
+- ❌ مكونات المراجعات (Rate/Review)
+- ❌ مكونات العناوين (Address)
+- ❌ مكونات Wishlist
+- ❌ صفحة Checkout
+- ❌ جميع الـ Redux actions والـ reducers المتعلقة بالأعلى
 
-### Advanced Configuration
+### تم تبسيط:
+- ✅ عملية الشراء - شراء مباشر بدون سلة
+- ✅ صفحة الطلبات - عرض معلومات الحساب
+- ✅ لوحة المستخدم - طلبات وملف شخصي فقط
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🛣️ Routes
 
-### Deployment
+### Public Routes
+- `/` - الصفحة الرئيسية
+- `/login` - تسجيل الدخول
+- `/register` - التسجيل
+- `/products` - جميع المنتجات
+- `/products/:id` - تفاصيل المنتج
+- `/allcategory` - جميع التصنيفات
+- `/products/category/:id` - منتجات تصنيف معين
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Protected User Routes
+- `/user/allorders` - طلبات المستخدم
+- `/user/profile` - الملف الشخصي
 
-### `npm run build` fails to minify
+### Protected Admin Routes
+- `/admin/allorders` - إدارة الطلبات
+- `/admin/orders/:id` - تفاصيل الطلب
+- `/admin/allproducts` - إدارة المنتجات
+- `/admin/addproduct` - إضافة منتج
+- `/admin/editproduct/:id` - تعديل منتج
+- `/admin/addcategory` - إضافة تصنيف
+- `/admin/addcoupon` - إضافة كوبون
+- `/admin/slider-images` - إدارة السلايدر
+- `/admin/discount-images` - إدارة صور العروض
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📦 الحزم المستخدمة
+
+- react - المكتبة الأساسية
+- react-router-dom - التنقل
+- redux - إدارة الحالة
+- react-redux - ربط Redux مع React
+- axios - HTTP client
+- bootstrap - التصميم
+- react-bootstrap - مكونات Bootstrap لـ React
+- react-toastify - الإشعارات
+
+## 🔐 الحماية
+
+- `ProtectedRoute` - حماية المسارات حسب الصلاحيات
+- `protected-route-hook` - التحقق من صلاحيات المستخدم
+- تخزين JWT في localStorage
+- إعادة توجيه تلقائية للمستخدمين غير المصرح لهم
+
+## 📱 الصفحات الرئيسية
+
+### الصفحة الرئيسية
+- سلايدر رئيسي
+- قسم العروض والخصومات
+- عرض المنتجات حسب التصنيفات
+- قسم تسويقي
+
+### صفحة المنتجات
+- عرض جميع المنتجات
+- بحث وفلتر
+- ترتيب النتائج
+- Pagination
+
+### صفحة تفاصيل المنتج
+- صور المنتج
+- وصف تفصيلي
+- معلومات المدة والسعر
+- زر شراء مباشر
+
+### صفحة الطلبات
+- قائمة الطلبات
+- حالة الطلب
+- معلومات الحساب (بعد التسليم)
+
+## 🎯 المميزات
+
+- ✅ تصميم عصري وبسيط
+- ✅ واجهة سهلة الاستخدام
+- ✅ متجاوبة مع جميع الأجهزة
+- ✅ سرعة في التحميل
+- ✅ حماية قوية
+- ✅ إشعارات للمستخدم
+- ✅ بحث وفلتر متقدم
+
+---
+
+**ملاحظة**: تأكد من تشغيل Backend قبل استخدام Frontend.

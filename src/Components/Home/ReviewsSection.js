@@ -1,113 +1,175 @@
-import React from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
-import { Star, StarFill } from "react-bootstrap-icons";
-import ViewAllReviewsHook from "../../hook/reviews/view-all-reviews-hook";
+import React, { useState, useEffect } from "react";
+import { Carousel } from "react-bootstrap";
+import "./ReviewsSection.css";
 
 const ReviewsSection = () => {
-  const [reviews, loading] = ViewAllReviewsHook(7);
+  const allReviews = [
+    { name: "ابو حصه شهاب", text: "ما شاء الله سريعين مره وثقه", rating: 5 },
+    { name: "ماجد محمد", text: "متجر موثوق ورائع جدا شكرا لكم", rating: 5 },
+    { name: "Abdullah S", text: "خدمة ممتازة وفي متناول الجميع", rating: 5 },
+    { name: "Saad Noor", text: "اطلق متجر 🫡🫡", rating: 5 },
+    { name: "عبدالله الرشيدي", text: "اجمل متجر والله انصحكم فيه", rating: 5 },
+    {
+      name: "nouf hussin",
+      text: "سريعين ماشاءالله اشتركت وبسرعه وصلني الحساب",
+      rating: 5,
+    },
+    { name: "يوسف بلفوز", text: "حلو مضمون يستاهل اكتر من 5 نجوم", rating: 5 },
+    {
+      name: "Abo Oo",
+      text: "فوق التقيم وثقه من زمان اتعامل معه افضل ماجر تثق فيه",
+      rating: 5,
+    },
+    {
+      name: "عبدالملك احمد",
+      text: "متجر ممتاز وعلى طول يوصلك الاشتراك",
+      rating: 5,
+    },
+    {
+      name: "Hala Hasan",
+      text: "انا في ألمانيا كل اخواتي مشتركين عنكن...الباقات ممتازه",
+      rating: 5,
+    },
+    { name: "ريناد محمد", text: "رائع جدا سرعه التسليم", rating: 5 },
+    {
+      name: "Hussain Alqallaf",
+      text: "كل شي ممتاز وصلني باسرع وقت وشغال ١٠٠٪",
+      rating: 5,
+    },
+    {
+      name: "Waleed Hakami",
+      text: "والله ممتاز حسب تجربتي وحل الدعم المشكلة بسرعة 👍🏼",
+      rating: 5,
+    },
+    {
+      name: "هيا الغامدي",
+      text: "متجر رائع واسعاره ممتازة والخدمة كانت سريعة جدا",
+      rating: 5,
+    },
+    {
+      name: "saif Abdullah",
+      text: "لاهنتتو ماتقصرون افضل متجر والله",
+      rating: 5,
+    },
+    {
+      name: "علي عسيري",
+      text: "توصيل سريع وتعامل اكثر من رائع اشكرهم 👍🏻",
+      rating: 5,
+    },
+    {
+      name: "Khadija Hazeem",
+      text: "السعر ممتاز جداً و الإجراءات سريعة",
+      rating: 5,
+    },
+    { name: "Morouj alrashidi", text: "جودة و سعر ممتاز👍🏻", rating: 5 },
+    { name: "محمد العنزي", text: "جميل جداً", rating: 5 },
+    { name: "Mohammed Ali", text: "رائع", rating: 5 },
+    { name: "هيام العنزي", text: "مضمون وسريع👍🏻", rating: 5 },
+    {
+      name: "KASSEM HASHEM",
+      text: "الاستخدام فوري/ والرد على الواتساب سريع 👍",
+      rating: 5,
+    },
+    { name: "ناصر الشهري", text: "ممتاز", rating: 5 },
+    {
+      name: "Said aladawi",
+      text: "ممتاز وسريع في ثواني وصل الحساب",
+      rating: 5,
+    },
+  ];
 
-  const renderStars = (rating) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        i <= rating ? (
-          <StarFill key={i} className="text-warning me-1" size={16} />
-        ) : (
-          <Star key={i} className="text-muted me-1" size={16} />
-        )
-      );
+  const [index, setIndex] = useState(0);
+
+  // Shuffle array function
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    return stars;
+    return shuffled;
   };
 
-  if (loading) {
-    return (
-      <Container className="py-5">
-        <div className="text-center">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      </Container>
-    );
-  }
+  // Split reviews into groups of 4
+  const [reviewGroups, setReviewGroups] = useState([]);
 
-  if (!reviews || reviews.length === 0) {
-    return null;
-  }
+  useEffect(() => {
+    const shuffled = shuffleArray(allReviews);
+    const groups = [];
+    for (let i = 0; i < shuffled.length; i += 4) {
+      groups.push(shuffled.slice(i, i + 4));
+    }
+    setReviewGroups(groups);
+  }, []);
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
+
+  const getInitials = (name) => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase();
+  };
+
+  const renderStars = (rating) => {
+    return "⭐".repeat(rating);
+  };
 
   return (
-    <div className="reviews-section">
-      <Container className="py-5">
-        <Row className="mb-4">
-          <Col className="text-center">
-            <h2 className="fw-bold text-primary mb-3">آراء عملائنا</h2>
-            <p className="text-muted">اكتشف ما يقوله عملاؤنا عن تجربتهم معنا</p>
-          </Col>
-        </Row>
+    <section className="reviews-section">
+      <div className="container">
+        <div className="section-title">
+          <h2>آراء عملائنا</h2>
+          <p>اكتشف تجارب عملائنا الراضين عن خدماتنا</p>
+        </div>
 
-        <Row className="g-4">
-          {reviews.map((review, index) => (
-            <Col key={review._id} xs={12} md={6} lg={4}>
-              <Card className="h-100 shadow-sm border-0 review-card">
-                <Card.Body className="d-flex flex-column">
-                  <div className="d-flex align-items-center mb-3">
+        <div className="reviews-carousel-container">
+          <Carousel
+            activeIndex={index}
+            onSelect={handleSelect}
+            interval={5000}
+            controls={true}
+            indicators={true}
+            className="reviews-carousel"
+            fade={false}
+            slide={true}
+          >
+            {reviewGroups.map((group, groupIndex) => (
+              <Carousel.Item key={groupIndex} className="reviews-carousel-item">
+                <div className="reviews-grid-slider">
+                  {group.map((review, reviewIndex) => (
                     <div
-                      className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                      key={reviewIndex}
+                      className="review-card"
                       style={{
-                        width: "40px",
-                        height: "40px",
-                        fontSize: "16px",
-                        fontWeight: "bold",
+                        animationDelay: `${reviewIndex * 0.1}s`,
                       }}
                     >
-                      {review.user?.name?.charAt(0)?.toUpperCase() || "U"}
-                    </div>
-                    <div>
-                      <h6 className="mb-1 fw-bold">
-                        {review.user?.name || "مجهول"}
-                      </h6>
-                      <div className="d-flex align-items-center">
-                        {renderStars(review.ratings)}
-                        <span className="text-muted small ms-2">
-                          ({review.ratings})
-                        </span>
+                      <div className="review-header">
+                        <div className="review-avatar">
+                          {getInitials(review.name)}
+                        </div>
+                        <div className="review-info">
+                          <div className="review-author">{review.name}</div>
+                          <div className="review-rating">
+                            {renderStars(review.rating)}
+                          </div>
+                        </div>
                       </div>
+                      <p className="review-text">{review.text}</p>
                     </div>
-                  </div>
-
-                  <p
-                    className="text-muted flex-grow-1 mb-3"
-                    style={{ fontSize: "14px", lineHeight: "1.6" }}
-                  >
-                    {review.title || "تقييم ممتاز"}
-                  </p>
-
-                  <div className="mt-auto">
-                    <small className="text-muted">
-                      {new Date(review.createdAt).toLocaleDateString("ar-SA")}
-                    </small>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-
-        <Row className="mt-4">
-          <Col className="text-center">
-            <div className="bg-light rounded p-4">
-              <h5 className="text-primary mb-2">
-                انضم إلى آلاف العملاء الراضين
-              </h5>
-              <p className="text-muted mb-0">
-                شاركنا تجربتك وساعد الآخرين في اتخاذ قرارهم
-              </p>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+                  ))}
+                </div>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </div>
+      </div>
+    </section>
   );
 };
 

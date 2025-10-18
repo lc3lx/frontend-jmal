@@ -149,7 +149,7 @@ const AdminHomepageImages = () => {
                 <Card>
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:8000/uploads/homepage/${image.image}`}
+                    src={`/uploads/homepage/${image.image}`}
                     style={{ height: "200px", objectFit: "cover" }}
                   />
                   <Card.Body>
@@ -191,7 +191,7 @@ const AdminHomepageImages = () => {
                 <Card>
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:8000/uploads/homepage/${image.image}`}
+                    src={`/uploads/homepage/${image.image}`}
                     style={{ height: "200px", objectFit: "cover" }}
                   />
                   <Card.Body>

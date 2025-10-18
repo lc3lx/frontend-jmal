@@ -1,0 +1,80 @@
+/* Discount Section Styles */
+.discount-section-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.discount-image-card {
+  animation: fadeInUp 0.6s ease both;
+}
+
+.discount-image-container {
+  background: #f8f9fa;
+}
+
+.discount-image {
+  transition: transform 0.5s ease;
+}
+
+.discount-image-container:hover .discount-image {
+  transform: scale(1.02);
+}
+
+/* Loading spinner for images */
+.discount-image-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #e50914;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .discount-image-container {
+    height: 150px !important;
+  }
+
+  .discount-section-wrapper {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .discount-image-container {
+    height: 120px !important;
+    border-radius: 10px !important;
+  }
+
+  .discount-image-card {
+    margin-bottom: 15px !important;
+  }
+}

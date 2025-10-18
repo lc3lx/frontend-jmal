@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Carousel, Spinner, Container } from "react-bootstrap";
 import useHomepageImages from "../../hook/homepage/use-homepage-images-hook";
+import "./Silder.css";
 
 const Silder = () => {
   const [index, setIndex] = useState(0);
@@ -42,34 +43,14 @@ const Silder = () => {
       >
         {images.map((item, idx) => (
           <Carousel.Item key={item._id} interval={5000} className="slider-item">
-            <div
-              className="slider-content"
-              style={{
-                background:
-                  item.backgroundColor ||
-                  "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                minHeight: "400px",
-              }}
-            >
-              <Container>
-                <div className="row align-items-center h-100">
-                  <div className="col-lg-6">
-                    <div className="slider-text-content">
-                      <h1 className="slider-title">{item.title}</h1>
-                      <p className="slider-description">{item.description}</p>
-                    </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <div className="slider-image-container">
-                      <img
-                        className="slider-image"
-                        src={item.image}
-                        alt={item.title}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </Container>
+            <div className="slider-content">
+              <div className="slider-image-container">
+                <img
+                  className="slider-image"
+                  src={item.image}
+                  alt={item.title}
+                />
+              </div>
             </div>
           </Carousel.Item>
         ))}

@@ -1,16 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { Row, Col, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import ViewProductsDetalisHook from "./../../hook/products/view-products-detalis-hook";
-import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-
-import AddToCartHook from "./../../hook/cart/add-to-cart-hook";
+import ChoosePaymentMethod from "../Checkout/ChoosePaymentMethod";
 
 const ProductText = () => {
   const { id } = useParams();
   const [item, images, cat, brand] = ViewProductsDetalisHook(id);
-  const [colorClick, indexColor, addToCartHandel] = AddToCartHook(id, item);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+
+  const handleBuyNow = () => {
+    if (!item || !item._id) {
+      toast.error("خطأ في بيانات المنتج");
+      return;
+    }
+
+    // Check if user is logged in
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("يجب تسجيل الدخول أولاً");
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 1500);
+      return;
+    }
+
+    // Check stock
+    if (item.stock <= 0) {
+      toast.error("المنتج غير متوفر حالياً");
+      return;
+    }
+
+    setShowPaymentModal(true);
+  };
 
   return (
     <div>
@@ -37,24 +60,8 @@ const ProductText = () => {
       </Row>
       <Row>
         <Col md="8" className="mt-1 d-flex">
-          {item?.availableColors
-            ? item.availableColors.map((color, index) => {
-                return (
-                  <div
-                    key={index}
-                    onClick={() => colorClick(index, color)}
-                    className="color ms-2"
-                    style={{
-                      backgroundColor: color,
-                      border: indexColor === index ? "3px solid black" : "none",
-                    }}
-                  ></div>
-                );
-              })
-            : null}
-
           <div className="cat-text d-inline">
-            الكمية المتاحة : {item?.quantity || 0}{" "}
+            المخزون المتاح : {item?.stock || 0}{" "}
           </div>
         </Col>
       </Row>
@@ -84,14 +91,28 @@ const ProductText = () => {
               <span> {item?.price || 0}</span> ريال{" "}
             </div>
           )}
-          <div
-            onClick={addToCartHandel}
+          <Button
+            onClick={handleBuyNow}
+            disabled={!item || item.stock <= 0}
             className="product-cart-add px-3 py-3 d-inline mx-3"
+            style={{
+              backgroundColor: item?.stock <= 0 ? "#999" : "#272727",
+              color: "#fff",
+              border: "none",
+              cursor: item?.stock <= 0 ? "not-allowed" : "pointer",
+            }}
           >
-            اضف للعربة
-          </div>
+            {item?.stock <= 0 ? "غير متوفر" : "اشتري الآن"}
+          </Button>
         </Col>
       </Row>
+      {showPaymentModal && (
+        <ChoosePaymentMethod
+          productId={item._id}
+          productPrice={item.priceAfterDiscount || item.price}
+          onClose={() => setShowPaymentModal(false)}
+        />
+      )}
       <ToastContainer />
     </div>
   );

@@ -1,43 +1,95 @@
 import React from "react";
-import { Container, Col, Row } from "react-bootstrap";
-import facebook from "../../images/facebook.png";
-import instagram from "../../images/instagram.png";
-import twitter from "../../images/twitter.png";
-import phone from "../../images/phone.png";
+import { Link } from "react-router-dom";
+import "./Footer.css";
+
 const Footer = () => {
   return (
-    <div
-      className="footer-background footer mt-3 pt-2"
-      style={{ maxHeight: "50px" }}
-    >
-      <Container className="">
-        <Row className="d-flex justify-content-between align-items-center">
-          <Col sm="6" className="d-flex align-items-center ">
-            <div className="footer-shroot ">الشروط والاحكام</div>
-            <div className="footer-shroot mx-2">سيايه الخصوصيه</div>
-            <div className="footer-shroot mx-2">اتصل بنا</div>
-          </Col>
-          <Col
-            sm="6"
-            className="d-flex justify-content-end align-items-center "
-          >
-            <div className="d-flex pt-3 mx-2">
-              <img width="20px" height="20px" src={phone} alt="" />
-              <p className="footer-phone">+352681125129</p>
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-content">
+          {/* من نحن */}
+          <div className="footer-section">
+            <h3>من نحن</h3>
+            <p>
+              في متجر فليكس نوفر لك البطاقات والاشتراكات والخدمات الرقمية بأعلى
+              جودة ممكنة وبأقل سعر ممكن لأن رضاك يهمنا 💙
+            </p>
+            <div className="footer-social">
+              <a
+                href="https://wa.me/966551200896"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+              >
+                <i className="fab fa-whatsapp"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-instagram"></i>
+              </a>
+              <a href="#" className="social-icon">
+                <i className="fab fa-telegram"></i>
+              </a>
             </div>
-            <div style={{ cursor: "pointer" }}>
-              <img width="20px" height="20px" src={facebook} alt="" />
+          </div>
+
+          {/* روابط سريعة */}
+          <div className="footer-section">
+            <h3>روابط سريعة</h3>
+            <Link to="/">الرئيسية</Link>
+            <Link to="/products">المنتجات</Link>
+            <Link to="/allcategory">الفئات</Link>
+            <Link to="/user/allorders">طلباتي</Link>
+          </div>
+
+          {/* روابط مهمة */}
+          <div className="footer-section">
+            <h3>روابط مهمة</h3>
+            <Link to="/privacy">سياسة الخصوصية</Link>
+            <Link to="/terms">الشروط والأحكام</Link>
+            <Link to="/refund">سياسة الاستبدال والإسترجاع</Link>
+            <Link to="/contact">تواصل معنا</Link>
+          </div>
+
+          {/* تواصل معنا */}
+          <div className="footer-section">
+            <h3>تواصل معنا</h3>
+            <div className="contact-info">
+              <p>
+                <i className="fas fa-phone"></i>
+                <a
+                  href="https://wa.me/966551200896"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  +966551200896
+                </a>
+              </p>
+              <p>
+                <i className="fas fa-envelope"></i>
+                <a href="mailto:support@streemstoer.com">
+                  support@streemstoer.com
+                </a>
+              </p>
+              <p>
+                <i className="fas fa-clock"></i>
+                <span>متاح 24/7</span>
+              </p>
             </div>
-            <div style={{ cursor: "pointer" }} className="">
-              <img width="20px" height="20px" src={instagram} alt="" />
-            </div>
-            <div style={{ cursor: "pointer" }} className="">
-              <img width="20px" height="20px" src={twitter} alt="" />
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p>الحقوق محفوظة © 2025 متجر فليكس. جميع الحقوق محفوظة</p>
+          <p className="footer-badge">
+            <i className="fas fa-shield-alt"></i>
+            موثوق في منصة الأعمال
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 };
 

@@ -1,9 +1,12 @@
 import React from "react";
 
+import HeroSection from "./../../Components/Home/HeroSection";
+import StatsSection from "./../../Components/Home/StatsSection";
+import FeaturesSection from "./../../Components/Home/FeaturesSection";
+import ReviewsSection from "./../../Components/Home/ReviewsSection";
 import Silder from "./../../Components/Home/Silder";
 import DiscountSection from "./../../Components/Home/DiscountSection";
 import CategoryWithProducts from "./../../Components/Home/CategoryWithProducts";
-import ReviewsSection from "../../Components/Home/ReviewsSection";
 import MarketingSection from "../../Components/Home/MarketingSection";
 
 import useHomepageProducts from "./../../hook/products/use-homepage-products-hook";
@@ -19,10 +22,13 @@ const HomePage = () => {
   console.log("HomePage - Error:", error);
   return (
     <div className="font homepage-container" style={{ minHeight: "670px" }}>
+      {/* Hero Section الجديد */}
+      <HeroSection />
+
       <div className="slider-container">
         <Silder />
       </div>
-      {/* <HomeCategory /> */}
+
       <DiscountSection />
 
       {/* Loading indicator */}
@@ -74,8 +80,16 @@ const HomePage = () => {
         </div>
       )}
 
+      {/* Reviews Section */}
       <ReviewsSection />
-      <MarketingSection />
+
+      {/* Features Section */}
+      <FeaturesSection />
+
+      {/* Stats Section */}
+      <StatsSection />
+
+      {/* <MarketingSection /> */}
     </div>
   );
 };

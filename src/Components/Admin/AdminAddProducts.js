@@ -1,140 +1,143 @@
-import React, { useState, useEffect } from 'react'
-import { Row, Col } from 'react-bootstrap'
-import Multiselect from 'multiselect-react-dropdown';
-import avatar from '../../images/avatar.png'
-import add from '../../images/add.png'
-import MultiImageInput from 'react-multiple-image-input';
-
-import { CompactPicker } from 'react-color'
-import { ToastContainer } from 'react-toastify';
-import AdminAddProductsHook from './../../hook/products/add-products-hook';
+import { Row, Col } from "react-bootstrap";
+import MultiImageInput from "react-multiple-image-input";
+import { ToastContainer } from "react-toastify";
+import AdminAddProductsHook from "./../../hook/products/add-products-hook";
+import "./AdminDashboard.css";
 
 const AdminAddProducts = () => {
+  const [
+    onChangePrice,
+    onChangeProdName,
+    category,
+    price,
+    images,
+    setImages, // onRemove - not used here
+    ,
+    onSeletCategory,
+    handelSubmit,
+    prodName,
+  ] = AdminAddProductsHook();
 
-    const [onChangeDesName, onChangeQty, onChangeColor, onChangePriceAfter, onChangePriceBefor, onChangeProdName, showColor, category, brand, priceAftr, images, setImages, onSelect, onRemove, options, handelChangeComplete, removeColor, onSeletCategory, handelSubmit, onSeletBrand, colors, priceBefore, qty, prodDescription, prodName] =
-        AdminAddProductsHook();
-        
-    return (
-        <div>
-            <Row className="justify-content-start ">
-                <div className="admin-content-text pb-4"> اضافه منتج جديد</div>
-                <Col sm="8">
-                    <div className="text-form pb-2"> صور للمنتج</div>
+  return (
+    <div className="admin-add-product-container">
+      <Row className="justify-content-start">
+        <div className="admin-content-text pb-4">إضافة منتج جديد</div>
+        <Col sm="10" md="8" lg="8">
+          <div className="product-form-card">
+            {/* صورة المنتج */}
+            <div className="form-section">
+              <label className="form-label">صورة المنتج *</label>
+              <MultiImageInput
+                images={images}
+                setImages={setImages}
+                theme={"light"}
+                allowCrop={false}
+                max={1}
+              />
+              <small className="form-hint">صورة واحدة فقط بحجم مناسب</small>
+            </div>
 
-                    <MultiImageInput
-                        images={images}
-                        setImages={setImages}
-                        theme={"light"}
-                        allowCrop={false}
-                        max={4}
-                    />
+            {/* اسم المنتج */}
+            <div className="form-section">
+              <label className="form-label">اسم المنتج *</label>
+              <input
+                value={prodName}
+                onChange={onChangeProdName}
+                type="text"
+                className="modern-input"
+                placeholder="مثال: Netflix Premium"
+              />
+            </div>
 
-                    <input
-                        value={prodName}
-                        onChange={onChangeProdName}
-                        type="text"
-                        className="input-form d-block mt-3 px-3"
-                        placeholder="اسم المنتج"
-                    />
-                    <textarea
-                        className="input-form-area p-2 mt-3"
-                        rows="4"
-                        cols="50"
-                        placeholder="وصف المنتج"
-                        value={prodDescription}
-                        onChange={onChangeDesName}
-                    />
-                    <input
-                        type="number"
-                        className="input-form d-block mt-3 px-3"
-                        placeholder="السعر قبل الخصم"
-                        value={priceBefore}
-                        onChange={onChangePriceBefor}
-                    />
-                    <input
-                        type="number"
-                        className="input-form d-block mt-3 px-3"
-                        placeholder="السعر بعد الخصم"
-                        value={priceAftr}
-                        onChange={onChangePriceAfter}
-                    />
-                    <input
-                        type="number"
-                        className="input-form d-block mt-3 px-3"
-                        placeholder="الكمية المتاحة"
-                        value={qty}
-                        onChange={onChangeQty}
-                    />
-                    <select
-                        name="cat"
-                        onChange={onSeletCategory}
-                        className="select input-form-area mt-3 px-2 ">
-                        <option value="0">التصنيف الرئيسي</option>
-                        {
-                            category.data ? (category.data.map((item, index) => {
-                                return (
-                                    <option key={index} value={item._id}>{item.name}</option>
-                                )
-                            })) : null
+            {/* وصف المنتج */}
+            <div className="form-section">
+              <label className="form-label">وصف المنتج *</label>
+              <textarea
+                className="modern-input modern-textarea"
+                rows="4"
+                placeholder="اكتب وصف تفصيلي للمنتج (20 حرف على الأقل)"
+                id="description"
+              />
+            </div>
 
-                        }
-                    </select>
-
-                    <Multiselect
-                        className="mt-2 text-end"
-                        placeholder="التصنيف الفرعي"
-                        options={options}
-                        onSelect={onSelect}
-                        onRemove={onRemove}
-                        displayValue="name"
-                        style={{ color: "red" }}
-                    />
-                    <select
-                        name="brand"
-                        onChange={onSeletBrand}
-                        className="select input-form-area mt-3 px-2 ">
-                        <option value="0">اختر ماركة</option>
-                        {
-                            brand.data ? (brand.data.map((item, index) => {
-                                return (
-                                    <option key={index} value={item._id}>{item.name}</option>
-                                )
-                            })) : null
-
-                        }
-                    </select>
-                    <div className="text-form mt-3 "> الالوان المتاحه للمنتج</div>
-                    <div className="mt-1 d-flex">
-                        {
-                            colors.length >= 1 ? (
-                                colors.map((color, index) => {
-                                    return (
-                                        <div key={index}
-                                            onClick={() => removeColor(color)}
-                                            className="color ms-2 border  mt-1"
-                                            style={{ backgroundColor: color }}></div>
-                                    )
-                                })
-
-                            ) : null
-                        }
-
-                        <img onClick={onChangeColor} src={add} alt="" width="30px" height="35px" style={{ cursor: 'pointer' }} />
-                        {
-                            showColor === true ? <CompactPicker onChangeComplete={handelChangeComplete} /> : null
-                        }
-
-                    </div>
-                </Col>
-            </Row>
+            {/* التصنيف والمدة */}
             <Row>
-                <Col sm="8" className="d-flex justify-content-end ">
-                    <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">حفظ التعديلات</button>
-                </Col>
+              <Col md="6">
+                <div className="form-section">
+                  <label className="form-label">التصنيف *</label>
+                  <select
+                    name="cat"
+                    onChange={onSeletCategory}
+                    className="modern-select"
+                  >
+                    <option value="0">اختر التصنيف</option>
+                    {category.data
+                      ? category.data.map((item, index) => {
+                          return (
+                            <option key={index} value={item._id}>
+                              {item.name}
+                            </option>
+                          );
+                        })
+                      : null}
+                  </select>
+                </div>
+              </Col>
+              <Col md="6">
+                <div className="form-section">
+                  <label className="form-label">مدة الاشتراك *</label>
+                  <select className="modern-select" id="duration">
+                    <option value="">اختر المدة</option>
+                    <option value="1 month">شهر واحد</option>
+                    <option value="3 months">3 شهور</option>
+                    <option value="6 months">6 شهور</option>
+                    <option value="1 year">سنة كاملة</option>
+                  </select>
+                </div>
+              </Col>
             </Row>
-            <ToastContainer />
-        </div>
-    )
-}
 
-export default AdminAddProducts
+            {/* المخزون والسعر */}
+            <Row>
+              <Col md="6">
+                <div className="form-section">
+                  <label className="form-label">المخزون المتاح *</label>
+                  <input
+                    type="number"
+                    className="modern-input"
+                    placeholder="عدد الحسابات المتوفرة"
+                    id="stock"
+                    min="0"
+                  />
+                </div>
+              </Col>
+              <Col md="6">
+                <div className="form-section">
+                  <label className="form-label">السعر *</label>
+                  <input
+                    type="number"
+                    className="modern-input"
+                    placeholder="السعر بالريال"
+                    value={price}
+                    onChange={onChangePrice}
+                    min="0"
+                  />
+                </div>
+              </Col>
+            </Row>
+
+            {/* زر الحفظ */}
+            <div className="form-actions">
+              <button onClick={handelSubmit} className="modern-btn-save">
+                <i className="fas fa-check"></i> حفظ المنتج
+              </button>
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <ToastContainer />
+    </div>
+  );
+};
+
+export default AdminAddProducts;

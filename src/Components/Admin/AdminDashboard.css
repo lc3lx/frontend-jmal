@@ -1,0 +1,215 @@
+/* Admin Dashboard Styles */
+
+/* Add Product Form */
+.admin-add-product-container {
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+.product-form-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.form-section {
+  margin-bottom: 25px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.form-hint {
+  display: block;
+  color: #7f8c8d;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.modern-input,
+.modern-textarea,
+.modern-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+}
+
+.modern-input:focus,
+.modern-textarea:focus,
+.modern-select:focus {
+  outline: none;
+  border-color: #272727;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(39, 39, 39, 0.1);
+}
+
+.modern-textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.modern-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 16px center;
+  padding-right: 40px;
+}
+
+.form-actions {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.modern-btn-save {
+  background: linear-gradient(135deg, #272727 0%, #000000 100%);
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(39, 39, 39, 0.3);
+}
+
+.modern-btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(39, 39, 39, 0.4);
+}
+
+.modern-btn-save:active {
+  transform: translateY(0);
+}
+
+.modern-btn-save i {
+  margin-left: 8px;
+}
+
+/* Admin Sidebar */
+.admin-sidebar {
+  background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+.admin-sidebar .admin-text-side {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 20px 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 10px;
+}
+
+.admin-sidebar .admin-side-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  padding: 15px 25px;
+  display: block;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-right: 3px solid transparent;
+}
+
+.admin-sidebar .admin-side-text:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-right-color: white;
+  padding-right: 30px;
+}
+
+.admin-sidebar .admin-side-text.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border-right-color: white;
+}
+
+/* Admin Content */
+.admin-content-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #272727;
+  display: inline-block;
+}
+
+/* Product Cards in Admin */
+.admin-product-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.admin-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Order Cards in Admin */
+.admin-order-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-right: 4px solid #272727;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.order-status-badge {
+  display: inline-block;
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.order-status-paid {
+  background: #d4edda;
+  color: #155724;
+}
+
+.order-status-unpaid {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.order-status-delivered {
+  background: #cce5ff;
+  color: #004085;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-form-card {
+    padding: 20px;
+  }
+
+  .admin-content-text {
+    font-size: 22px;
+  }
+
+  .modern-btn-save {
+    width: 100%;
+  }
+}

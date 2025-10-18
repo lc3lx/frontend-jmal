@@ -20,14 +20,15 @@ const GetOrderDetalisHook = (id) => {
         get()
     }, [])
 
-    //get address detalis for user
+    //get order details
     const resOneOrder = useSelector(state => state.orderReducer.getOneOrder)
     useEffect(() => {
         if (loading === false) {
-            if (resOneOrder.data)
+            if (resOneOrder.data) {
                 setOrderData(resOneOrder.data)
-            if (resOneOrder.data.cartItems)
-                setCartItems(resOneOrder.data.cartItems)
+                // الطلبات الجديدة لا تحتوي على cartItems، فقط product واحد
+                setCartItems(resOneOrder.data.product ? [resOneOrder.data.product] : [])
+            }
             console.log(resOneOrder)
         }
     }, [loading])

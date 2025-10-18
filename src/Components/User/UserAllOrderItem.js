@@ -13,9 +13,9 @@ const UserAllOrderItem = ({ orderItem }) => {
                 <div className="py-2 order-title">طلب رقم #{orderItem.id || 0} ...تم بتاريخ {formatDate(orderItem.createdAt)}</div>
             </Row>
             {
-                orderItem.cartItems ? (orderItem.cartItems.map((item, index) => {
-                    return <UserAllOrderCard key={index} item={item} />
-                })) : null
+                orderItem.product ? (
+                    <UserAllOrderCard item={orderItem.product} />
+                ) : null
             }
 
             <Row className="d-flex justify-content-between">

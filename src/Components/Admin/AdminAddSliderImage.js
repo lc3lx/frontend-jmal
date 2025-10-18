@@ -1,87 +1,138 @@
-import React from "react";
-import { Row, Col, Spinner } from "react-bootstrap";
+import React, { useState } from "react";
+import { Row, Col, Button, Spinner } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
-import AddSliderImageHook from "../../hook/homepage/add-slider-image-hook";
+import notify from "../../hook/useNotifaction";
+import baseUrl from "../../Api/baseURL";
+import "./AdminDashboard.css";
 
 const AdminAddSliderImage = () => {
-  const [
-    img,
-    title,
-    description,
-    backgroundColor,
-    loading,
-    isPress,
-    handelSubmit,
-    onImageChange,
-    onChangeTitle,
-    onChangeDescription,
-    onChangeBackgroundColor,
-  ] = AddSliderImageHook();
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!image) {
+      notify("الرجاء اختيار صورة", "warn");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("type", "slider");
+      formData.append("title", "Slider Image");
+      formData.append("description", "Slider");
+      formData.append("image", image);
+
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+
+      const response = await baseUrl.post(
+        "/api/v1/homepage-images",
+        formData,
+        config
+      );
+
+      if (response.status === 201) {
+        notify("تم إضافة صورة السلايدر بنجاح", "success");
+        setImage(null);
+        setPreview(null);
+        // Reset file input
+        document.getElementById("slider-image-input").value = "";
+      } else {
+        notify("فشل في إضافة الصورة", "error");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      notify("حدث خطأ أثناء رفع الصورة", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div>
-      <Row className="justify-content-start ">
-        <div className="admin-content-text pb-4">إضافة صورة سليدر جديدة</div>
-        <Col sm="8">
-          <div className="text-form pb-2">صورة السليدر</div>
-          <div>
-            <label htmlFor="upload-photo">
-              <img
-                src={img}
-                alt="slider preview"
-                height="100px"
-                width="120px"
-                style={{ cursor: "pointer" }}
+    <div className="admin-add-product-container">
+      <Row className="justify-content-start">
+        <div className="admin-content-text pb-4">إضافة صورة سلايدر</div>
+        <Col sm="10" md="8" lg="6">
+          <div className="product-form-card">
+            <div className="form-section">
+              <label className="form-label">صورة السلايدر *</label>
+              <input
+                type="file"
+                id="slider-image-input"
+                className="modern-input"
+                accept="image/*"
+                onChange={handleImageChange}
               />
-            </label>
-            <input
-              type="file"
-              name="photo"
-              onChange={onImageChange}
-              id="upload-photo"
-            />
+              <small className="form-hint">
+                اختر صورة عالية الجودة لعرضها في السلايدر الرئيسي
+              </small>
+            </div>
+
+            {preview && (
+              <div className="form-section">
+                <label className="form-label">معاينة الصورة</label>
+                <div
+                  style={{
+                    borderRadius: "10px",
+                    overflow: "hidden",
+                    border: "2px solid #e0e0e0",
+                  }}
+                >
+                  <img
+                    src={preview}
+                    alt="معاينة"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      display: "block",
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="form-actions">
+              <Button
+                onClick={handleSubmit}
+                disabled={loading || !image}
+                className="modern-btn-save"
+              >
+                {loading ? (
+                  <>
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                      style={{ marginLeft: "10px" }}
+                    />
+                    جاري الرفع...
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-upload"></i> رفع الصورة
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
-
-          <input
-            onChange={onChangeTitle}
-            value={title}
-            type="text"
-            className="input-form d-block mt-3 px-3"
-            placeholder="عنوان السليدر"
-          />
-
-          <textarea
-            className="input-form-area p-2 mt-3"
-            rows="3"
-            placeholder="وصف السليدر (5 أحرف على الأقل)"
-            value={description}
-            onChange={onChangeDescription}
-          />
-
-          <input
-            onChange={onChangeBackgroundColor}
-            value={backgroundColor}
-            type="text"
-            className="input-form d-block mt-3 px-3"
-            placeholder="لون الخلفية (اختياري) - مثال: #ff0000"
-          />
         </Col>
       </Row>
-      <Row>
-        <Col sm="8" className="d-flex justify-content-end ">
-          <button onClick={handelSubmit} className="btn-save d-inline mt-2 ">
-            إضافة صورة السليدر
-          </button>
-        </Col>
-      </Row>
-
-      {isPress ? (
-        loading ? (
-          <Spinner animation="border" variant="primary" />
-        ) : (
-          <h4>تم الانتهاء</h4>
-        )
-      ) : null}
       <ToastContainer />
     </div>
   );

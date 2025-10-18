@@ -1,0 +1,344 @@
+.reviews-section {
+  padding: 100px 0;
+  background: #0a0a0a;
+  position: relative;
+}
+
+.reviews-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e50914, transparent);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.section-title p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Carousel Container */
+.reviews-carousel-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.reviews-carousel {
+  border-radius: 15px;
+  overflow: visible;
+}
+
+.reviews-carousel-item {
+  padding: 20px 0;
+}
+
+/* Reviews Grid inside Slider */
+.reviews-grid-slider {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  padding: 10px;
+}
+
+/* Review Card */
+.review-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: fadeInUp 0.6s ease both;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.review-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #e50914, #ff4d4d, #e50914);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.review-card:hover::before {
+  transform: scaleX(1);
+}
+
+.review-card:hover {
+  border-color: #e50914;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(229, 9, 20, 0.2);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.review-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+  transition: all 0.3s ease;
+}
+
+.review-card:hover .review-avatar {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6);
+}
+
+.review-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.review-author {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-rating {
+  color: #ffc107;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+.review-text {
+  color: #b3b3b3;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Carousel Controls */
+.reviews-carousel .carousel-control-prev,
+.reviews-carousel .carousel-control-next {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.reviews-carousel:hover .carousel-control-prev,
+.reviews-carousel:hover .carousel-control-next {
+  opacity: 1;
+}
+
+.reviews-carousel .carousel-control-prev {
+  right: -25px;
+  left: auto;
+}
+
+.reviews-carousel .carousel-control-next {
+  left: -25px;
+  right: auto;
+}
+
+.reviews-carousel .carousel-control-prev:hover,
+.reviews-carousel .carousel-control-next:hover {
+  background: rgba(229, 9, 20, 0.95);
+  transform: translateY(-50%) scale(1.15);
+  border-color: rgba(229, 9, 20, 0.5);
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+}
+
+.reviews-carousel .carousel-control-prev-icon,
+.reviews-carousel .carousel-control-next-icon {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Carousel Indicators */
+.reviews-carousel .carousel-indicators {
+  bottom: -40px;
+  margin-bottom: 0;
+}
+
+.reviews-carousel .carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+
+.reviews-carousel .carousel-indicators button.active {
+  background-color: #e50914;
+  border-color: #e50914;
+  transform: scale(1.4);
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.6);
+}
+
+.reviews-carousel .carousel-indicators button:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.2);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .reviews-grid-slider {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .review-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .reviews-grid-slider {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .reviews-carousel .carousel-control-prev {
+    right: -15px;
+  }
+
+  .reviews-carousel .carousel-control-next {
+    left: -15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .reviews-section {
+    padding: 60px 0;
+  }
+
+  .section-title h2 {
+    font-size: 28px;
+  }
+
+  .section-title p {
+    font-size: 16px;
+  }
+
+  .reviews-grid-slider {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .review-card {
+    padding: 1.5rem;
+    min-height: auto;
+  }
+
+  .review-avatar {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .review-author {
+    font-size: 0.95rem;
+  }
+
+  .review-text {
+    font-size: 0.85rem;
+  }
+
+  .reviews-carousel .carousel-control-prev,
+  .reviews-carousel .carousel-control-next {
+    width: 40px;
+    height: 40px;
+  }
+
+  .reviews-carousel .carousel-control-prev-icon,
+  .reviews-carousel .carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .reviews-carousel .carousel-control-prev {
+    right: 5px;
+  }
+
+  .reviews-carousel .carousel-control-next {
+    left: 5px;
+  }
+
+  .reviews-carousel .carousel-indicators {
+    bottom: -30px;
+  }
+
+  .reviews-carousel .carousel-indicators button {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews-section {
+    padding: 50px 0;
+  }
+
+  .section-title h2 {
+    font-size: 24px;
+  }
+
+  .reviews-carousel-container {
+    padding: 0 10px;
+  }
+}

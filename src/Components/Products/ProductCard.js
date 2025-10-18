@@ -6,11 +6,10 @@ import { Link } from "react-router-dom";
 
 import { ToastContainer } from "react-toastify";
 import ProductCardHook from "./../../hook/products/product-card-hook";
-import AddToCartSimpleHook from "./../../hook/cart/add-to-cart-simple-hook";
+import "./ProductCard.css";
 
 const ProductCard = ({ item, favProd }) => {
   const [, , handelFav, favImg] = ProductCardHook(item, favProd);
-  const [addToCartHandel, loading] = AddToCartSimpleHook(item);
 
   return (
     <Card
@@ -97,15 +96,12 @@ const ProductCard = ({ item, favProd }) => {
           </div>
         </div>
         <div className="product-add-to-cart">
-          <Button
-            variant="primary"
-            onClick={addToCartHandel}
-            disabled={loading}
-            className="add-to-cart-btn"
-          >
-            <span className="btn-icon">🛒</span>
-            {loading ? "جاري الإضافة..." : "أضف إلى العربة"}
-          </Button>
+          <Link to={`/products/${item._id}`} style={{ textDecoration: "none" }}>
+            <Button variant="primary" className="add-to-cart-btn">
+              <span className="btn-icon">🛒</span>
+              اشتري الآن
+            </Button>
+          </Link>
         </div>
       </Card.Body>
       <ToastContainer />
