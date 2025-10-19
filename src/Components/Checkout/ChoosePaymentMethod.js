@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Row, Col, Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { createOrder, createPayPalOrder } from "../../redux/actions/ordersAction";
+import {
+  createOrder,
+  createPayPalOrder,
+} from "../../redux/actions/ordersAction";
+import "./ChoosePaymentMethod.css";
 
 const ChoosePaymentMethod = ({ productId, productPrice, onClose }) => {
   const dispatch = useDispatch();
@@ -20,7 +24,8 @@ const ChoosePaymentMethod = ({ productId, productPrice, onClose }) => {
       if (paymentMethod === "cash") {
         // Cash order
         await dispatch(createOrder({ productId }));
-        toast.success("تم إنشاء الطلب بنجاح! سيتم التواصل معك قريباً");
+        toast.success("🎉 تم إنشاء الطلب بنجاح! سيتم التواصل معك قريباً");
+        onClose();
         setTimeout(() => {
           window.location.href = "/user/allorders";
         }, 2000);
@@ -28,26 +33,36 @@ const ChoosePaymentMethod = ({ productId, productPrice, onClose }) => {
         // PayPal order
         const response = await dispatch(createPayPalOrder(productId));
         if (response.data && response.data.approvalUrl) {
+          toast.info("جاري تحويلك إلى PayPal...");
           // Redirect to PayPal
           window.location.href = response.data.approvalUrl;
         } else {
           toast.error("فشل في إنشاء طلب PayPal");
+          setLoading(false);
         }
       }
     } catch (error) {
       console.error("Payment error:", error);
       toast.error("حدث خطأ أثناء المعالجة");
-    } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Modal show={true} onHide={onClose} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>اختر طريقة الدفع</Modal.Title>
+    <Modal
+      show={true}
+      onHide={onClose}
+      centered
+      className="payment-modal"
+      backdrop="static"
+    >
+      <Modal.Header closeButton className="payment-modal-header">
+        <Modal.Title>
+          <span className="payment-title-icon">💳</span>
+          اختر طريقة الدفع
+        </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="payment-modal-body">
         <Row>
           <Col md={12}>
             <div className="payment-method-container">
@@ -56,21 +71,15 @@ const ChoosePaymentMethod = ({ productId, productPrice, onClose }) => {
                   paymentMethod === "cash" ? "selected" : ""
                 }`}
                 onClick={() => setPaymentMethod("cash")}
-                style={{
-                  border: "2px solid #ddd",
-                  borderRadius: "10px",
-                  padding: "20px",
-                  marginBottom: "15px",
-                  cursor: "pointer",
-                  backgroundColor:
-                    paymentMethod === "cash" ? "#f8f9fa" : "white",
-                  transition: "all 0.3s",
-                }}
               >
-                <h5>💵 الدفع عند الاستلام</h5>
-                <p style={{ margin: 0, color: "#666" }}>
-                  ادفع بعد استلام بيانات الحساب
-                </p>
+                <div className="payment-option-icon">💵</div>
+                <div className="payment-option-content">
+                  <h5>الدفع عند الاستلام</h5>
+                  <p>ادفع بعد استلام بيانات الحساب</p>
+                </div>
+                <div className="payment-option-check">
+                  {paymentMethod === "cash" && "✓"}
+                </div>
               </div>
 
               <div
@@ -78,52 +87,53 @@ const ChoosePaymentMethod = ({ productId, productPrice, onClose }) => {
                   paymentMethod === "paypal" ? "selected" : ""
                 }`}
                 onClick={() => setPaymentMethod("paypal")}
-                style={{
-                  border: "2px solid #ddd",
-                  borderRadius: "10px",
-                  padding: "20px",
-                  cursor: "pointer",
-                  backgroundColor:
-                    paymentMethod === "paypal" ? "#f8f9fa" : "white",
-                  transition: "all 0.3s",
-                }}
               >
-                <h5>💳 الدفع عبر PayPal</h5>
-                <p style={{ margin: 0, color: "#666" }}>
-                  ادفع الآن بشكل آمن عبر PayPal
-                </p>
+                <div className="payment-option-icon">💳</div>
+                <div className="payment-option-content">
+                  <h5>الدفع عبر PayPal</h5>
+                  <p>ادفع الآن بشكل آمن عبر PayPal</p>
+                </div>
+                <div className="payment-option-check">
+                  {paymentMethod === "paypal" && "✓"}
+                </div>
               </div>
 
-              <div
-                style={{
-                  marginTop: "20px",
-                  padding: "15px",
-                  backgroundColor: "#e7f3ff",
-                  borderRadius: "8px",
-                }}
-              >
-                <p style={{ margin: 0, fontSize: "14px" }}>
-                  <strong>السعر الإجمالي:</strong> {productPrice} ريال
-                </p>
+              <div className="payment-total">
+                <span className="payment-total-label">السعر الإجمالي:</span>
+                <span className="payment-total-amount">
+                  {productPrice} ريال
+                </span>
               </div>
             </div>
           </Col>
         </Row>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
+      <Modal.Footer className="payment-modal-footer">
+        <Button
+          variant="secondary"
+          onClick={onClose}
+          className="payment-cancel-btn"
+          disabled={loading}
+        >
           إلغاء
         </Button>
         <Button
           variant="primary"
           onClick={handlePayment}
           disabled={loading}
-          style={{
-            backgroundColor: "#272727",
-            border: "none",
-          }}
+          className="payment-confirm-btn"
         >
-          {loading ? "جاري المعالجة..." : "تأكيد الدفع"}
+          {loading ? (
+            <>
+              <span className="spinner-border spinner-border-sm me-2"></span>
+              جاري المعالجة...
+            </>
+          ) : (
+            <>
+              <span className="btn-icon">✓</span>
+              تأكيد الدفع
+            </>
+          )}
         </Button>
       </Modal.Footer>
     </Modal>
@@ -131,4 +141,3 @@ const ChoosePaymentMethod = ({ productId, productPrice, onClose }) => {
 };
 
 export default ChoosePaymentMethod;
-

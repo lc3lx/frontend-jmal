@@ -280,9 +280,13 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .product-image-container {
-    height: 220px;
+    height: 240px;
+  }
+
+  .product-card-body {
+    padding: 1.2rem !important;
   }
 
   .product-title {
@@ -291,32 +295,221 @@
 
   .discounted-price,
   .regular-price {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .add-to-cart-btn {
     font-size: 1rem !important;
     padding: 12px !important;
   }
+}
 
-  .view-product-text {
+@media (max-width: 768px) {
+  .product-card {
+    border-radius: 10px !important;
+  }
+
+  .product-image-container {
+    height: 200px;
+  }
+
+  .product-card-body {
+    padding: 1rem !important;
+    gap: 0.8rem;
+  }
+
+  .product-title {
     font-size: 1rem;
-    padding: 10px 24px;
+    min-height: 2.4em;
+    line-height: 1.2;
   }
 
-  .product-favorite-btn {
-    width: 40px;
-    height: 40px;
+  .product-info {
+    gap: 0.8rem;
   }
 
-  .favorite-icon {
-    width: 20px;
-    height: 20px;
+  .product-rating {
+    gap: 0.5rem;
+  }
+
+  .rating-stars {
+    gap: 3px;
   }
 
   .rating-star {
     width: 16px;
     height: 16px;
+  }
+
+  .rating-value {
+    font-size: 0.85rem;
+  }
+
+  .discounted-price,
+  .regular-price {
+    font-size: 1.3rem;
+  }
+
+  .original-price {
+    font-size: 0.85rem;
+  }
+
+  .add-to-cart-btn {
+    font-size: 0.95rem !important;
+    padding: 11px !important;
+    gap: 0.4rem !important;
+  }
+
+  .btn-icon {
+    font-size: 1.1rem;
+  }
+
+  .view-product-text {
+    font-size: 0.95rem;
+    padding: 8px 20px;
+  }
+
+  .product-favorite-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .favorite-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .discount-badge {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .product-overlay-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    border-radius: 8px !important;
+  }
+
+  .product-image-container {
+    height: 180px;
+  }
+
+  .product-card-body {
+    padding: 0.8rem !important;
+    gap: 0.6rem;
+  }
+
+  .product-title {
+    font-size: 0.9rem;
+    min-height: 2.2em;
+    -webkit-line-clamp: 2;
+  }
+
+  .product-info {
+    gap: 0.6rem;
+  }
+
+  .product-rating {
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .rating-stars {
+    gap: 2px;
+  }
+
+  .rating-star {
+    width: 14px;
+    height: 14px;
+  }
+
+  .rating-value {
+    font-size: 0.8rem;
+  }
+
+  .discounted-price,
+  .regular-price {
+    font-size: 1.15rem;
+  }
+
+  .original-price {
+    font-size: 0.8rem;
+  }
+
+  .add-to-cart-btn {
+    font-size: 0.85rem !important;
+    padding: 10px 8px !important;
+    gap: 0.3rem !important;
+  }
+
+  .btn-icon {
+    font-size: 1rem;
+  }
+
+  .view-product-text {
+    font-size: 0.85rem;
+    padding: 7px 16px;
+  }
+
+  .product-favorite-btn {
+    width: 35px;
+    height: 35px;
+  }
+
+  .favorite-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .discount-badge {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  .discount-percentage {
+    font-size: 0.85rem;
+  }
+
+  .product-overlay-content {
+    padding: 1rem;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+}
+
+@media (max-width: 360px) {
+  .product-image-container {
+    height: 160px;
+  }
+
+  .product-card-body {
+    padding: 0.6rem !important;
+    gap: 0.5rem;
+  }
+
+  .product-title {
+    font-size: 0.85rem;
+  }
+
+  .rating-star {
+    width: 12px;
+    height: 12px;
+  }
+
+  .discounted-price,
+  .regular-price {
+    font-size: 1rem;
+  }
+
+  .add-to-cart-btn {
+    font-size: 0.8rem !important;
+    padding: 9px 6px !important;
   }
 }
 

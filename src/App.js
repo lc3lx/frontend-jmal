@@ -4,6 +4,8 @@ import NavBarLogin from "./Components/Uitily/NavBarLogin";
 import Footer from "./Components/Uitily/Footer";
 import LoginPage from "./Page/Auth/LoginPage";
 import RegisterPage from "./Page/Auth/RegisterPage";
+import MagicLinkLoginPage from "./Page/Auth/MagicLinkLoginPage";
+import VerifyLoginPage from "./Page/Auth/VerifyLoginPage";
 import AllCategoryPage from "./Page/Category/AllCategoryPage";
 import ShopProductsPage from "./Page/Products/ShopProductsPage";
 import ProductDetalisPage from "./Page/Products/ProductDetalisPage";
@@ -39,6 +41,8 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/magic-login" element={<MagicLinkLoginPage />} />
+          <Route path="/verify-login" element={<VerifyLoginPage />} />
           <Route path="/allcategory" element={<AllCategoryPage />} />
           <Route path="/products" element={<ShopProductsPage />} />
           <Route path="/products/:id" element={<ProductDetalisPage />} />

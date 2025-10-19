@@ -22,9 +22,6 @@ const HomePage = () => {
   console.log("HomePage - Error:", error);
   return (
     <div className="font homepage-container" style={{ minHeight: "670px" }}>
-      {/* Hero Section الجديد */}
-      <HeroSection />
-
       <div className="slider-container">
         <Silder />
       </div>

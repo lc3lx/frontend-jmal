@@ -19,9 +19,9 @@ const ProductText = () => {
     // Check if user is logged in
     const token = localStorage.getItem("token");
     if (!token) {
-      toast.error("يجب تسجيل الدخول أولاً");
+      toast.info("سجل دخول بإيميلك لإكمال عملية الشراء");
       setTimeout(() => {
-        window.location.href = "/login";
+        window.location.href = "/magic-login";
       }, 1500);
       return;
     }
