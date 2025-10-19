@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="متجر فليكس - نوفر لك حسابات Netflix و Shahid و Disney+ وغيرها بأفضل الأسعار. خدمة عملاء 24/7 وتوصيل فوري وضمان 100%"
+      content="متجر ستريم ستور  - نوفر لك حسابات Netflix و Shahid و Disney+ وغيرها بأفضل الأسعار. خدمة عملاء 24/7 وتوصيل فوري وضمان 100%"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -41,7 +41,7 @@
       crossorigin="anonymous"
     ></script>
     <script crossorigin src="../src/index.js"></script>
-    <title>متجر فليكس - أفضل الاشتراكات بأقل الأسعار</title>
+    <title>متجر ستريم ستور - أفضل الاشتراكات بأقل الأسعار</title>
   </head>
 
   <body>
@@ -59,3 +59,24 @@
     -->
   </body>
 </html>
+
+<header class="py-3 text-center" dir="rtl" style="background: transparent">
+  <header class="py-3 text-center" dir="rtl" style="background: transparent">
+    <!--
+        Logo display: the <picture> element tries to load PNG first (if you place
+        a `streamstore-logo.png` in this folder), otherwise it falls back to the
+        generated SVG. To use your PNG, add the file to `public/` and it will be
+        picked automatically.
+      -->
+    <picture>
+      <source srcset="%PUBLIC_URL%/streamstore-logo.png" type="image/png" />
+      <img
+        src="%PUBLIC_URL%/logo.png"
+        alt="متجر ستريم ستور"
+        style="max-height: 80px; width: auto"
+      />
+    </picture>
+  </header>
+</header>
+
+<div id="root"></div>

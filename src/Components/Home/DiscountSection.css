@@ -1,6 +1,9 @@
 /* Discount Section Styles */
 .discount-section-wrapper {
   max-width: 1400px;
+  max-height: 100px;
+  border-radius: 90px;
+  overflow: hidden;
   margin: 0 auto;
 }
 
