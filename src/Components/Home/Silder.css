@@ -85,14 +85,14 @@
 
 /* Carousel Indicators */
 .homepage-slider .carousel-indicators {
-  bottom: 25px;
+  bottom: 10px;
   margin-bottom: 0;
-  gap: 8px;
+  gap: 3px;
 }
 
 .homepage-slider .carousel-indicators button {
-  width: 10px;
-  height: 10px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.4);
   border: 2px solid rgba(255, 255, 255, 0.6);
@@ -105,7 +105,7 @@
   background-color: #e50914;
   border-color: #e50914;
   transform: scale(1.4);
-  box-shadow: 0 0 15px rgba(229, 9, 20, 0.6);
+  box-shadow: 0 0 14px rgba(229, 9, 20, 0.6);
 }
 
 .homepage-slider .carousel-indicators button:hover {
