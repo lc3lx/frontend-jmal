@@ -16,7 +16,7 @@ const Footer = () => {
             </p>
             <div className="footer-social">
               <a
-                href="https://wa.me/+966540869074"
+                href="https://wa.me/+966598486514"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -60,11 +60,11 @@ const Footer = () => {
               <p>
                 <i className="fas fa-phone"></i>
                 <a
-                  href="https://wa.me/966551200896"
+                  href="https://wa.me/+966598486514"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  +966551200896
+                  +966598486514
                 </a>
               </p>
               <p>
